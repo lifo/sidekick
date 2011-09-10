@@ -1,0 +1,15 @@
+first:
+  name: first
+  taggable: lifo_hello (Post)
+
+welcome:
+  name: welcome
+  taggable: lifo_hello (Post)
+
+cramp:
+  name: cramp
+  taggable: cramp_launch (Post)
+
+bob_first:
+  name: first
+  taggable: bob_hello (Post)

@@ -1,0 +1,19 @@
+lifo_hello:
+  user: lifo
+  title: First post
+  content: Welcome everyone!
+
+cramp_launch:
+  user: lifo
+  title: Say hi to Cramp
+  content: Cramp is the new async framework.
+
+cramp_update:
+  user: lifo
+  title: Cramp 1.0
+  content: Happy to announce Cramp 1.0
+
+bob_hello:
+  user: bob
+  title: Hello
+  content: Well hello Bob.

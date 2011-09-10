@@ -1,0 +1,26 @@
+troll_comment:
+  post: lifo_hello
+  body: O Hai
+  author_name: Trollol
+reply_troll_comment:
+  post: lifo_hello
+  body: Stop trolling
+  author_name: Lifo
+another_comment:
+  post: lifo_hello
+  body: Stop it both of you
+  author_name: Fifo
+
+cramp_update_comment:
+  post: cramp_update
+  body: Congrats
+  author_name: Bob
+
+bob_hello_comment:
+  post: bob_hello
+  body: Welcome Bob!
+  author_name: Lifo
+reply_bob_hello_comment:
+  post: bob_hello
+  body: Thanks Lifo.
+  author_name: Bob

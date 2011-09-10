@@ -1,0 +1,31 @@
+PATH
+  remote: .
+  specs:
+    sidekick (3.0.1)
+      activerecord (~> 3.0.9)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activemodel (3.0.10)
+      activesupport (= 3.0.10)
+      builder (~> 2.1.2)
+      i18n (~> 0.5.0)
+    activerecord (3.0.10)
+      activemodel (= 3.0.10)
+      activesupport (= 3.0.10)
+      arel (~> 2.0.10)
+      tzinfo (~> 0.3.23)
+    activesupport (3.0.10)
+    arel (2.0.10)
+    builder (2.1.2)
+    i18n (0.5.0)
+    mysql2 (0.2.13)
+    tzinfo (0.3.29)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mysql2 (~> 0.2.11)
+  sidekick!
