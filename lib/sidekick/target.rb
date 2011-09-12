@@ -10,7 +10,7 @@ module Sidekick
       reflection_name = @reflection.name
 
       # Fucking STI
-      working_record_set = @owner._parent_record_set.find_all {|r| r.respond_to?(reflection_name) }
+      working_record_set = @owner._parent_record_set.find_all {|r| r.class.reflect_on_association(reflection_name) }
 
       @owner.class.send(:preload_associations, working_record_set, reflection_name.to_sym)
 
