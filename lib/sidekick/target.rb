@@ -12,10 +12,10 @@ module Sidekick
       # Fucking STI
       working_record_set = @owner._parent_record_set.find_all {|r| r.class.reflect_on_association(reflection_name) }
 
-      @owner.class.send(:preload_associations, working_record_set, reflection_name.to_sym)
+      ActiveRecord::Associations::Preloader.new(working_record_set, reflection_name).run
 
       record_set = working_record_set.map do |r|
-        x = r.send(:instance_variable_get, "@#{reflection_name}")
+        x = r.association(reflection_name)
         x.target if x
       end
 
@@ -26,8 +26,12 @@ module Sidekick
 
       record_set.each {|r| r._parent_record_set = record_set }
 
-      associtaion = @owner.send(:instance_variable_get, "@#{reflection_name}")
-      associtaion.target if associtaion
+      association = @owner.association(reflection_name)
+
+      if association
+        # [] is to prevent double merge for one-many associations
+        association.target.is_a?(Array) ? [] : association.target
+      end
     end
 
     def skip_kick_preload?

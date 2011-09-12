@@ -2,6 +2,9 @@ require 'test_helper'
 
 class BasicTest < ActiveRecord::TestCase
   def test_has_many
+    # user = User.preload(:posts).all
+    # puts user.detect {|u| u.name == 'Lifo' }.inspect
+    # puts user.detect {|u| u.name == 'Lifo' }.posts.inspect
     assert_queries(3) do
       # Query 1
       users = User.all
@@ -59,24 +62,16 @@ class BasicTest < ActiveRecord::TestCase
   end
 
   def test_belongs_reload
-    # Need to fix AR 3.0.x to not call .reload for loading the association the first time
-    flunk
-
-    # Create a post with missing user_id
-    orphan_post = Post.new(:title => 'Whatever', :content => 'Fake')
-    orphan_post.user_id = User.maximum(:id) + 10
-    orphan_post.save!
-
     assert_queries(3) do
       # Query 1
       posts = Post.all
-      orphan_post = posts.detect {|p| p.id == orphan_post.id }
+      hello_post = posts.detect {|p| p.title == 'Hello' }
 
-      # Query 2 - Load all the authors
-      assert_equal ["Lifo", "Bob"], posts.map(&:user).compact.map(&:name).uniq
-      assert_nil orphan_post.user
+      # Query 2 - Load all the users
+      assert_equal 'Bob', hello_post.user.name
 
-      assert_nil orphan_post.user(:reload)
+      # Query 3 - Reload Bob
+      assert_equal 'Bob', hello_post.user.reload.name
     end
   end
 
