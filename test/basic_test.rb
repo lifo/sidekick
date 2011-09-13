@@ -62,7 +62,7 @@ class BasicTest < ActiveRecord::TestCase
   end
 
   def test_belongs_reload
-    assert_queries(4) do
+    assert_queries(3) do
       # Query 1
       posts = Post.all
       hello_post = posts.detect {|p| p.title == 'Hello' }
@@ -70,7 +70,7 @@ class BasicTest < ActiveRecord::TestCase
       # Query 2 - Load all the users
       assert_equal 'Bob', hello_post.user.name
 
-      # Query 3 & 4- Reload Bob. Also fires SHOW TABLES query.
+      # Query 3 Reload Bob
       assert_equal 'Bob', hello_post.user.reload.name
     end
   end
