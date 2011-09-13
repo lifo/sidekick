@@ -1,23 +1,24 @@
 require 'sidekick/target'
 require 'sidekick/reload'
 
-class ActiveRecord::Base
-  attr_accessor :_parent_record_set
+module Sidekick
+  module Record
+    def reload(*)
+      self._parent_record_set = nil
+      super
+    end
 
-  def reload_with_kick(*)
-    self._parent_record_set = nil
-    reload_without_kick
-  end
-
-  alias_method_chain :reload, :kick
-
-  module Destructor
     def destroy(*)
       self._parent_record_set = nil
       super
     end
   end
-  include Destructor
+end
+
+class ActiveRecord::Base
+  attr_accessor :_parent_record_set
+
+  include Sidekick::Record
 
   [:clone, :dup].each do |method_name|
     define_method(:"#{method_name}_with_kick") do
