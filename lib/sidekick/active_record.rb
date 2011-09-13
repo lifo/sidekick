@@ -41,6 +41,10 @@ class ActiveRecord::Relation
   alias_method_chain :to_a, :kick
 end
 
+if ActiveRecord::VERSION::STRING < '3.1' && !ActiveRecord::Associations::AssociationProxy.instance_methods.include?(:load)
+  require 'sidekick/association_proxy_monkey'
+end
+
 [
   ActiveRecord::Associations::BelongsToAssociation,
   ActiveRecord::Associations::HasManyAssociation,
@@ -50,12 +54,6 @@ end
   ActiveRecord::Associations::HasManyThroughAssociation
 ].each do |association_klass|
   association_klass.send :include, Sidekick::Target
-end
-
-[
-  ActiveRecord::Associations::HasManyAssociation,
-  ActiveRecord::Associations::HasManyThroughAssociation
-].each do |association_klass|
   association_klass.send :include, Sidekick::Reload
 end
 

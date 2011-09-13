@@ -6,10 +6,7 @@ module Sidekick
 
     def reload_with_kick
       @owner._parent_record_set = nil
-
-      reset
-      load_target
-      self unless @target.nil?
+      reload_without_kick
     end
   end
 end
