@@ -24,7 +24,7 @@ module Sidekick
         if association.nil? || force_reload
           association = association_proxy_class.new(self, reflection)
           retval = force_reload ? reflection.klass.uncached { association.reload } : association.load
-          if retval.nil? and association_proxy_class == BelongsToAssociation
+          if retval.nil? and association_proxy_class == ActiveRecord::Associations::BelongsToAssociation
             association_instance_set(reflection.name, nil)
             return nil
           end
