@@ -10,7 +10,7 @@ module Sidekick
       reflection_name = @reflection.name
 
       # Fucking STI
-      working_record_set = @owner._parent_record_set.find_all {|r| r.class.reflect_on_association(reflection_name) }
+      working_record_set = @owner._parent_record_set.find_all {|r| r.class.reflect_on_association(reflection_name) }.uniq
 
       # Sorry new records. You don't belong.
       working_record_set.each do |r|
